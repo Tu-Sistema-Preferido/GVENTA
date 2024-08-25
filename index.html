@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="HTML5, CSS3, JavaScript">
+    <title>G-VENTA SOFTWARE PUNTO DE VENTA</title>
+
+    <!--link rel="stylesheet" href="estilos2.css"-->
+    <!--link rel="stylesheet" href="css/fontello.css"-->
+    <link rel="stylesheet" href="fontello.css">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css">
+    <script src="bootstrap.min.js"></script>
+    <script src="jquery.js"></script>
+    <script src="jquery.dataTables.min.js"></script>
+
+    <style>
+        body {
+            margin: 20px;
+            padding: 0;
+            font-family: Radio Grotesk;
+            background-image: url(img/bkg2.jpg);
+            color: #FFFFFF;
+            background-repeat: no-repeat;
+        }
+
+        form {
+            list-style-type: auto;
+            margin: none;
+            padding: none;
+            overflow: hidden;
+            background: #050814;
+            border-radius: 24px;
+            border: 5px solid #451c6e;
+        }
+
+        ul {
+            list-style-type: lower-alpha;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+            overflow: hidden;
+            background: #050814;
+            border-radius: 24px;
+            border: 5px solid #451c6e;
+        }
+
+        img {
+            width: 350px;
+        }
+
+        section {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(50px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        a {
+            color: #FFFFFF;
+        }
+
+        #carrito {
+					width: 500px;
+					margin: 0 auto;
+					padding: 20px;
+					background-color: transparent;
+					border: 2px solid rgba(255, 255, 255, 0.5);
+					backdrop-filter: blur(50px);
+					box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        #carrito h2 {
+            text-align: center;
+        }
+
+        #carrito table {
+            width: 100%;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+        }
+
+        #carrito table th, #carrito table td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        #carrito table th {
+					background-color: transparent;
+					border: 2px solid rgba(255, 255, 255, 0.5);
+					backdrop-filter: blur(50px);
+					box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        #carrito-total {
+            text-align: right;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+				.fin{
+					width: 40%;
+					border: 2px solid rgba(255, 255, 255, 0.5);
+
+					box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+					transition: color 0.3s ease, transform 0.3s ease;
+				}
+
+				.fin:hover{
+					background-color: #d13f00;
+					transition: color 0.3s ease, transform 0.3s ease;
+				}
+
+				.btn:hover{
+					background-color: #d13f00;
+					transition: color 0.3s ease, transform 0.3s ease;
+				}
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <!-- Tu contenido del header -->
+    </header>
+
+    <div class="container">
+        <h1 align="center">G-VENTA</h1>
+        <section id="seccion" class="col-md-8">
+            <div class="row">
+                <div class="col-xs-6 col-sm-3 col-md-3">
+                    <div class="caption">
+                        <img src="portadaGVENTA.png" align="center"/>
+                        <h3 align="center">Software GVENTA</h3>
+                        <p>
+                            <!--a href="licencias de uso/licencia 1.html" class="btn btn-primary" role="button" target="_blank">Licencia</a-->
+                            <a href="#" class="btn btn-default producto" precio="1000.00" titulo="Software G-VENTA" role="button"><i class="icon-basket"></i> Comprar</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+			<br>
+			<!-- Sección del carrito de compras -->
+			<div id="carrito">
+					<h2>Carrito de Compras</h2>
+					<table>
+							<thead>
+									<tr>
+											<th>Producto</th>
+											<th>Precio</th>
+											<th>Cantidad</th>
+									</tr>
+							</thead>
+							<tbody id="carrito-items">
+									<!-- Aquí se agregarán los productos del carrito -->
+							</tbody>
+					</table>
+					<div id="carrito-total">Total: $<span id="total-amount">0.00</span></div>
+					<div class="fin">
+					<button id="#" class="btn btn-default producto"><i class="icon-basket"> Finalizar Compra</i></button>
+					</div>
+				</div>
+
+		<script src="minicart.js"></script>
+<script src="search.js"></script>
+<script>
+    // Configuración inicial del carrito
+    paypal.minicart.render({
+        strings: {
+            button: 'Pagar',
+            buttonAlt: "Total",
+            subtotal: 'Total:',
+            empty: 'No hay productos en el carrito'
+        }
+    });
+
+    // Eventos para agregar productos al carrito
+    $('.producto').click(function(e) {
+        e.stopPropagation();
+        paypal.minicart.cart.add({
+            business: 'adriangomora0305@gmail.com', // Cuenta paypal para recibir el dinero
+            item_name: $(this).attr("titulo"),
+            amount: $(this).attr("precio"),
+            currency_code: 'MXN',
+        });
+
+        actualizarCarrito();
+    });
+
+    function actualizarCarrito() {
+        var items = paypal.minicart.cart.items();
+        var carritoItems = '';
+        var totalAmount = 0;
+
+        items.forEach(function(item) {
+            carritoItems += '<tr><td>' + item.get('item_name') + '</td><td>$' + item.get('amount') + '</td><td>' + item.get('quantity') + '</td></tr>';
+            totalAmount += item.get('amount') * item.get('quantity');
+        });
+
+        $('#carrito-items').html(carritoItems);
+        $('#total-amount').text(totalAmount.toFixed(2));
+    }
+
+    // Actualizar el carrito al cargar la página
+    $(document).ready(function() {
+        actualizarCarrito();
+    });
+
+    // Evento para el botón de Finalizar Compra
+    $('#finalizar-compra').click(function(e) {
+        e.preventDefault();
+        // Lógica para finalizar la compra o redirigir a la página de pago
+        $('.producto').trigger('click'); // Simula la acción de agregar al carrito
+        alert("Compra finalizada correctamente.");
+        // Aquí puedes agregar la lógica de redirigir a una página de confirmación o pago
+    });
+</script>
+
+</body>
+</html>
